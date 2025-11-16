@@ -1,6 +1,4 @@
 """
-experiment.py
-
 URNet experiments for 32x32 SPI reconstruction.
 
 Modes:

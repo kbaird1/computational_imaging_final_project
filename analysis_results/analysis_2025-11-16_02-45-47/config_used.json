@@ -1,0 +1,7 @@
+{
+  "base_channels": 128,
+  "min_channels": 64,
+  "num_refine_convs": 2,
+  "lr": 0.01,
+  "num_iters": 6000
+}

@@ -1,22 +1,20 @@
 """
-reconstruction.py
-
 Supports URNet reconstruction at:
     - 32×32
     - 64×64
     - 128×128
 
-Implements **exactly** the optimization described in:
+Implements the optimization described in:
   Li et al., "URNet: High-quality single-pixel imaging with untrained
   reconstruction network" (Optics & Laser Engineering, 2023)
 
-Training configuration (paper-faithful):
+Training configuration:
   - Loss: L1( s_pred, s_true )
   - Optimizer: Adam(lr = 0.08)
   - LR decay: multiply by 0.8 every 3000 iters
   - Initialization: Xavier uniform (handled in URNet class)
 
-Pattern selection (paper-faithful):
+Pattern selection:
   - Hadamard (Walsh-ordered) basis of size N×N
   - Sampling ratio r → K = floor(r * M)
   - Use FIRST K patterns (lowest K frequencies)

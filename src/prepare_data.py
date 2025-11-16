@@ -1,6 +1,4 @@
 """
-prepare_data.py
-
 Loads CIFAR-10 (32×32) and produces:
   - 32×32 grayscale dataset
   - 64×64 grayscale dataset (upsampled)

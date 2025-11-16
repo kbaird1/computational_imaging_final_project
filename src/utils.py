@@ -1,9 +1,4 @@
 """
-utils.py — updated
-
-Now fully resolution-agnostic and robust for:
-    32×32, 64×64, 128×128 images.
-
 Includes:
   - Image normalization
   - PSNR / SSIM metrics

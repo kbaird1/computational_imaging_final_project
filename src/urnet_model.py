@@ -121,7 +121,7 @@ class URNet(nn.Module):
 
         self.refine_blocks = nn.ModuleList(refine_blocks)
 
-        # Final conv to 1 channel (NO activation)
+        # Final conv to 1 channel
         self.final_conv = nn.Conv2d(
             feat_ch,
             1,

@@ -1,6 +1,4 @@
 """
-tval3.py
-
 TVAL3-style baseline for compressed sensing SPI reconstruction.
 
 This is a Python implementation of a TV-regularized least-squares

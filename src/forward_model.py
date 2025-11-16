@@ -1,6 +1,4 @@
 """
-forward_model.py
-
 Forward single-pixel imaging (SPI) model for URNet-style experiments.
 
 Provides:
@@ -32,7 +30,7 @@ def _validate_hadamard_size(N: int):
 
 
 # ============================================================
-# True Walsh–Hadamard sequency ordering via Gray-code rule
+# Walsh–Hadamard sequency ordering via Gray-code rule
 # ============================================================
 
 def _gray_code(n: int) -> int:

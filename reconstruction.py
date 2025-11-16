@@ -1,6 +1,4 @@
 """
-main.py
-
 End-to-end debugging framework for the SPI → Reconstruction pipeline,
 now supporting multiple image sizes:
 
