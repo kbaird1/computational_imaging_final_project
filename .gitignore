@@ -1,0 +1,53 @@
+# ============================================================
+# Python Cache / Build Artifacts
+# ============================================================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Build directories
+build/
+dist/
+*.egg-info/
+
+# ============================================================
+# Experiment & Dataset Outputs
+# ============================================================
+data/
+results/
+
+# If you want the folder structure to exist, but stay empty:
+# data/*
+# !data/.gitkeep
+# results/*
+# !results/.gitkeep
+
+# ============================================================
+# Virtual Environments
+# ============================================================
+venv/
+.env/
+.venv/
+
+# Poetry environment
+poetry.lock
+
+# Conda environment
+conda-env/
+
+# ============================================================
+# OS / Editor Files
+# ============================================================
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
