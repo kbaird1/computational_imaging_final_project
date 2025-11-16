@@ -226,46 +226,105 @@ def hyperparam_search():
 
 def plot_sampling_panel_for_image(gt_img, recon_list, sampling_ratios, metric_list, save_path):
     K = len(sampling_ratios)
-    fig, axes = plt.subplots(1, K + 1, figsize=(3.0 * (K + 1), 3.5))
 
-    axes[0].imshow(gt_img, cmap="gray")
-    axes[0].set_title("Ground Truth")
-    axes[0].axis("off")
+    fig, axes = plt.subplots(
+        3,                # 3 rows: image, PSNR row, SSIM row
+        K + 1,            # Number of columns (GT + K reconstructions)
+        figsize=(3.2 * (K + 1), 5.0),
+        gridspec_kw={"height_ratios": [5, 0.8, 0.8]}
+    )
+
+    # ----- Row 0: images -----
+    axes[0, 0].imshow(gt_img, cmap="gray")
+    axes[0, 0].set_title("Ground Truth")
+    axes[0, 0].axis("off")
 
     for j in range(K):
-        ax = axes[j + 1]
+        ax = axes[0, j + 1]
         ax.imshow(recon_list[j], cmap="gray")
         r = sampling_ratios[j]
-        psnr, ssim = metric_list[j]
         ax.set_title(f"{int(100*r)}%")
-        ax.set_xlabel(f"PSNR={psnr:.2f}\nSSIM={ssim:.3f}")
         ax.axis("off")
+
+    # ----- Row 1: PSNR scores -----
+    axes[1, 0].text(0.5, 0.5, "", ha="center", va="center")
+    axes[1, 0].axis("off")
+
+    for j in range(K):
+        psnr, _ = metric_list[j]
+        axes[1, j + 1].text(
+            0.5, 0.5, f"PSNR = {psnr:.2f}",
+            ha="center", va="center", fontsize=10
+        )
+        axes[1, j + 1].axis("off")
+
+    # ----- Row 2: SSIM scores -----
+    axes[2, 0].text(0.5, 0.5, "", ha="center", va="center")
+    axes[2, 0].axis("off")
+
+    for j in range(K):
+        _, ssim = metric_list[j]
+        axes[2, j + 1].text(
+            0.5, 0.5, f"SSIM = {ssim:.3f}",
+            ha="center", va="center", fontsize=10
+        )
+        axes[2, j + 1].axis("off")
 
     plt.tight_layout()
     plt.savefig(save_path, dpi=200)
     plt.close()
+
 
 
 def plot_noise_panel_for_image(gt_img, recon_list, snr_list, metric_list, save_path):
     K = len(snr_list)
-    fig, axes = plt.subplots(1, K + 1, figsize=(3.0 * (K + 1), 3.5))
 
-    axes[0].imshow(gt_img, cmap="gray")
-    axes[0].set_title("Ground Truth")
-    axes[0].axis("off")
+    fig, axes = plt.subplots(
+        3,            # 3 rows: image, PSNR row, SSIM row
+        K + 1,
+        figsize=(3.2 * (K + 1), 5.0),
+        gridspec_kw={"height_ratios": [5, 0.8, 0.8]}
+    )
+
+    # ----- Row 0: images -----
+    axes[0, 0].imshow(gt_img, cmap="gray")
+    axes[0, 0].set_title("Ground Truth")
+    axes[0, 0].axis("off")
 
     for j in range(K):
-        ax = axes[j + 1]
+        ax = axes[0, j + 1]
         ax.imshow(recon_list[j], cmap="gray")
-        snr = snr_list[j]
-        psnr, ssim = metric_list[j]
-        ax.set_title(f"{snr} dB")
-        ax.set_xlabel(f"PSNR={psnr:.2f}\nSSIM={ssim:.3f}")
+        ax.set_title(f"{snr_list[j]} dB")
         ax.axis("off")
+
+    # ----- Row 1: PSNR scores -----
+    axes[1, 0].text(0.5, 0.5, "", ha="center", va="center")
+    axes[1, 0].axis("off")
+
+    for j in range(K):
+        psnr, _ = metric_list[j]
+        axes[1, j + 1].text(
+            0.5, 0.5, f"PSNR = {psnr:.2f}",
+            ha="center", va="center", fontsize=10
+        )
+        axes[1, j + 1].axis("off")
+
+    # ----- Row 2: SSIM scores -----
+    axes[2, 0].text(0.5, 0.5, "", ha="center", va="center")
+    axes[2, 0].axis("off")
+
+    for j in range(K):
+        _, ssim = metric_list[j]
+        axes[2, j + 1].text(
+            0.5, 0.5, f"SSIM = {ssim:.3f}",
+            ha="center", va="center", fontsize=10
+        )
+        axes[2, j + 1].axis("off")
 
     plt.tight_layout()
     plt.savefig(save_path, dpi=200)
     plt.close()
+
 
 
 # ============================================================
@@ -291,7 +350,7 @@ def analysis_mode(config_path):
 
     sampling_ratios = [0.05, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9]
     snr_list = [5, 10, 20, 40, 60, 80, 100]
-    fixed_sampling_for_noise = 0.8
+    fixed_sampling_for_noise = 0.75
 
     # tqdm for image loop
     for idx, img in enumerate(tqdm(imgs, desc="Images")):
